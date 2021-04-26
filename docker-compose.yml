@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  tm.foodapp.api:
+    image: ${DOCKER_REGISTRY-}tmfoodappapi
+    ports: 
+      - 55000:443
+      - 55001:80
+    build:
+      context: .
+      dockerfile: TM.FoodApp.Api/Dockerfile
+    environment:
+      - ASPNETCORE_URLS=http://*.55000
+
+  tm.foodapp.services.recipecatalog:
+    image: ${DOCKER_REGISTRY-}tmfoodappservicesrecipecatalog
+    ports: 
+      - 54000:80 
+    build:
+      context: .
+      dockerfile: TM.FoodApp.Services.RecipeCatalog/Dockerfile
+
